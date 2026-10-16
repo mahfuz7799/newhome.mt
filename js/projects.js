@@ -1,0 +1,13 @@
+/* ADD A PROJECT: copy one block, change slug + fields, drop images in /images. Page: project.html?p=<slug> */
+const PROJECTS=[
+{slug:"hadrian-flats",title:"Hadrian Flats",location:"San Ġwann, Malta",
+cover:"images/hadrian-cover.jpg",coverNote:"The completed Hadrian Flats development",
+summary:"Completed airspace development and block renovation: a new passenger lift, renewed common areas and new rooftop washrooms for the existing owners.",
+overview:"New possibilities. Better everyday living. The original block had six units and no passenger lift. We purchased the airspace above the roof from the owners at an agreed amount and, in return, renovated the entire block, installed a passenger lift and created new washrooms at the highest level.",
+beforeTitle:"Before: the original block",beforeText:"An ageing six-unit block with no passenger lift, which became harder to live in as residents grew older. This image shows the original appearance, reconstructed from reference photographs.",
+before:"images/hadrian-before.jpg",
+afterTitle:"After: the completed development",afterText:"A refreshed exterior, renewed common areas and a passenger lift, with the new development above the original block.",after:"images/hadrian-cover.jpg",
+gallery:[["images/hadrian-s1.jpg","Reinforcement and formwork prepared for a new concrete slab"],["images/hadrian-s2.jpg","Overview of the new upper-level layout"],["images/hadrian-s3.jpg","Masonry partitions defining the new spaces"],["images/hadrian-l1.jpg","Services installed below floor level"],["images/hadrian-l2.jpg","Lift installation in progress"],["images/hadrian-l3.jpg","The renewed landing and lift entrance"],["images/hadrian-e1.jpg","During: services and entrance works"],["images/hadrian-e2.jpg","After: a renewed entrance corridor"],["images/hadrian-e3.jpg","After: the Hadrian Flats entrance"],["images/hadrian-i1.jpg","A finished interior within the development"],["images/hadrian-i2.jpg","Finished internal circulation space"],["images/hadrian-i3.jpg","A completed upper-level terrace"]],
+notes:["Passenger lift installed, making movement between floors easier for residents","Entrance and common areas renewed: flooring, lighting, wall finishes and mailboxes","New rooftop washrooms for the existing owners, finished to their preferences: plumbing, electricity, tiling, plastering, painting and fitted bathrooms","Services and refurbishment works coordinated across the whole block","For the owners, the agreement brought both an airspace payment and the improvements agreed for their building"],
+benefits:"If your block needs a lift, renovation or a new approach to its rooftop potential, speak to us about what may be possible."}
+];
