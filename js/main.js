@@ -13,27 +13,29 @@ if(!window.__sc){window.__sc=1;addEventListener("scroll",()=>window.__scf&&windo
 if(home&&!window.__intro){window.__intro=1;document.body.classList.add("first");const s=document.createElement("div");s.id="splash";s.setAttribute("aria-hidden","true");s.innerHTML='<img src="images/logo.png" alt=""><i></i>';document.body.appendChild(s);
 setTimeout(()=>s.classList.add("out"),2300);setTimeout(()=>{s.remove();document.body.classList.remove("first")},3200)}
 const mb=$(".menu");mb.onclick=()=>{const o=hd.classList.toggle("open");mb.setAttribute("aria-expanded",o)};
-const card=p=>`<article class="card"><img src="${p.cover}" alt="${p.title}" loading="lazy"><div><span class="loc">${p.location}</span><h3>${p.title}</h3><p>${p.summary}</p><a class="btn" href="project.html?p=${p.slug}">View Project</a></div></article>`;
+const card=p=>`<article class="card"><img src="${p.cover}" alt="${p.title}" loading="lazy"><div>${p.status?`<span class="tag">${p.status}</span>`:""}<span class="loc">${p.location}</span><h3>${p.title}</h3><p>${p.summary}</p><a class="btn" href="project.html?p=${p.slug}">View Project</a></div></article>`;
 const cards=$("#cards");if(cards)cards.innerHTML=PROJECTS.map(card).join("");
 const pr=$("#project");
 if(pr){const p=PROJECTS.find(x=>x.slug===new URLSearchParams(location.search).get("p"));
 if(!p)pr.innerHTML='<div class="wrap sec"><h1>Project not found</h1><p><a href="developments.html">See all developments</a></p></div>';
 else{document.title=`${p.title} | ${NAME}`;document.querySelector('meta[name=description]').content=p.summary;
 const row=(t,x,i)=>`<div class="row"><div><h2>${t}</h2><p>${x}</p></div><div><img src="${i}" alt="${t}"></div></div>`;
-pr.innerHTML=`<section class="hero"><div class="wrap"><div><p class="loc">${p.location}</p><h1>${p.title}</h1><p>${p.overview}</p><a class="btn" href="contact.html?project=${encodeURIComponent(p.title)}">Discuss Your Project</a></div>
-<div><img src="${p.cover}" alt="${p.title}"><p class="cap">${p.coverNote}</p></div></div></section>
-<section class="sec"><div class="wrap"><h2>Before and after</h2>${row(p.beforeTitle,p.beforeText,p.before)}${row(p.afterTitle,p.afterText,p.after)}
+const compare=p.before&&p.after?`<h2>Before and after</h2>${row(p.beforeTitle,p.beforeText,p.before)}${row(p.afterTitle,p.afterText,p.after)}
 <h3>See the difference</h3><p class="hint">Put your finger on the picture and <b>slide it left or right</b> to compare Before and After.</p>
 <div class="cmp"><img src="${p.after}" alt="After" draggable="false"><img class="top" src="${p.before}" alt="Before" draggable="false"><span class="lb l">Before</span><span class="lb r">After</span><div class="knob" aria-hidden="true"><span>◀ ▶</span></div><div class="tip">Slide your finger on the picture</div></div>
-<input class="rng" type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after">
-${p.gallery.length?`<h3 style="margin-top:48px">Project gallery</h3><div class="gal">${p.gallery.map(g=>`<figure><img src="${g[0]}" alt="${g[1]}" loading="lazy"><figcaption class="cap">${g[1]}</figcaption></figure>`).join("")}</div>`:""}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="notes"><h2>Notes for potential clients</h2><ul class="tick">${p.notes.map(n=>`<li>${n}</li>`).join("")}</ul><p>${p.benefits}</p>
+<input class="rng" type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after">`:"";
+const gallery=p.gallery&&p.gallery.length?`<h3 style="margin-top:48px">${compare?"Project gallery":"Project photos"}</h3><div class="gal">${p.gallery.map(g=>`<figure><img src="${g[0]}" alt="${g[1]}" loading="lazy"><figcaption class="cap">${g[1]}</figcaption></figure>`).join("")}</div>`:"";
+pr.innerHTML=`<section class="hero"><div class="wrap"><div>${p.status?`<span class="tag">${p.status}</span>`:""}<p class="loc">${p.location}</p><h1>${p.title}</h1><p>${p.overview}</p><a class="btn" href="contact.html?project=${encodeURIComponent(p.title)}">Discuss Your Project</a></div>
+<div><img src="${p.cover}" alt="${p.title}"><p class="cap">${p.coverNote||""}</p></div></div></section>
+<section class="sec"><div class="wrap">${compare}${gallery}</div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="notes"><h2>Notes for potential clients</h2><ul class="tick">${(p.notes||[]).map(n=>`<li>${n}</li>`).join("")}</ul><p>${p.benefits||""}</p>
 <p><a class="btn" href="contact.html?project=${encodeURIComponent(p.title)}">Contact Us</a> <a class="btn alt" href="developments.html">All developments</a></p></div></div></section>`;
-const c=pr.querySelector(".cmp"),t=c.querySelector(".top"),k=c.querySelector(".knob"),s=pr.querySelector(".rng");
+const c=pr.querySelector(".cmp");
+if(c){const t=c.querySelector(".top"),k=c.querySelector(".knob"),s=pr.querySelector(".rng");
 const set=v=>{v=Math.max(0,Math.min(100,v));s.value=v;t.style.clipPath=`inset(0 ${100-v}% 0 0)`;k.style.left=v+"%"};
 s.oninput=()=>set(+s.value);
 const pt=e=>{const r=c.getBoundingClientRect();set((e.clientX-r.left)/r.width*100)};
-c.onpointerdown=e=>{c.setPointerCapture(e.pointerId);c.classList.add("used");pt(e);c.onpointermove=pt};c.onpointerup=c.onpointercancel=()=>c.onpointermove=null;set(50);
+c.onpointerdown=e=>{c.setPointerCapture(e.pointerId);c.classList.add("used");pt(e);c.onpointermove=pt};c.onpointerup=c.onpointercancel=()=>c.onpointermove=null;set(50);}
 }}
 const f=$("#enquiry");
 if(f){const q=new URLSearchParams(location.search).get("project");if(q)f.message.value=`Hello, I'm interested in ${q}. `;
