@@ -15,6 +15,7 @@ setTimeout(()=>s.classList.add("out"),2300);setTimeout(()=>{s.remove();document.
 const mb=$(".menu");mb.onclick=()=>{const o=hd.classList.toggle("open");mb.setAttribute("aria-expanded",o)};
 const card=p=>`<article class="card"><img src="${p.cover}" alt="${p.title}" loading="lazy"><div>${p.status?`<span class="tag">${p.status}</span>`:""}<span class="loc">${p.location}</span><h3>${p.title}</h3><p>${p.summary}</p><a class="btn" href="project.html?p=${p.slug}">View Project</a></div></article>`;
 const cards=$("#cards");if(cards)cards.innerHTML=PROJECTS.map(card).join("");
+const dn=$("#done");if(dn)dn.innerHTML=PROJECTS.filter(p=>p.status==="Completed"&&p.before&&p.after).map(p=>`<div class="done"><p class="loc">${p.location}</p><h3>${p.title}</h3><p style="max-width:60ch">${p.summary}</p><div class="ba"><figure><img src="${p.before}" alt="${p.title} before" loading="lazy"><figcaption>Before</figcaption></figure><figure><img src="${p.after}" alt="${p.title} after" loading="lazy"><figcaption>After</figcaption></figure></div>${p.beforeNote?`<p class="cap">${p.beforeNote}</p>`:""}<a class="btn" href="project.html?p=${p.slug}">View Project</a></div>`).join("");
 const pr=$("#project");
 if(pr){const p=PROJECTS.find(x=>x.slug===new URLSearchParams(location.search).get("p"));
 if(!p)pr.innerHTML='<div class="wrap sec"><h1>Project not found</h1><p><a href="developments.html">See all developments</a></p></div>';

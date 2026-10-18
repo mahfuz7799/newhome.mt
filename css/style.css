@@ -95,3 +95,10 @@ html{-webkit-text-size-adjust:100%;scroll-padding-top:90px}body{overflow-wrap:br
 @media(max-height:500px) and (orientation:landscape){body.home .hero{padding-top:100px}}
 .card .tag{align-self:flex-start}
 .hero .tag{background:var(--gold);color:var(--ink);margin-bottom:10px}
+
+/* bigger logo, completed projects on Home */
+.brand img{height:88px;width:88px}header.sc .brand img{height:72px;width:72px}header .brand img{transition:height .45s ease,width .45s ease}
+body.home .hero{padding-top:150px}body:not(.home) main{padding-top:92px}
+.done+.done{border-top:1px solid #2f3838;margin-top:48px;padding-top:40px}.done{margin-top:28px}
+@media(max-width:800px){.brand img{height:76px;width:76px}header.sc .brand img{height:64px;width:64px}body.home .hero{padding-top:130px}}
+@media(max-width:380px){.brand img{height:68px;width:68px}}
