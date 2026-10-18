@@ -18,12 +18,12 @@ const on = (f) =>
     : "";
 const L = (n) => `<a href="${n[0]}"${on(n[0])}>${n[1]}</a>`;
 $("header").innerHTML =
-  `<div class="wrap hd"><a class="brand" href="index.html" aria-label="${NAME} home"><img src="images/logo.png" alt="${NAME} logo"></a><nav class="dn" aria-label="Main">${nav.map(L).join("")}</nav><button class="menu" aria-expanded="false">Menu</button><nav class="mob" aria-label="Mobile">${nav.map(L).join("")}</nav></div>`;
+  `<div class="wrap hd"><a class="brand" href="/" aria-label="${NAME} home"><img src="images/logo.png" alt="${NAME} logo"></a><nav class="dn" aria-label="Main">${nav.map(L).join("")}</nav><button class="menu" aria-expanded="false">Menu</button><nav class="mob" aria-label="Mobile">${nav.map(L).join("")}</nav></div>`;
 $("footer").innerHTML =
   `<div class="wrap"><img src="images/logo.png" alt="${NAME}"><p>Direct from the developer. No agent fees.<br>New residential developments · Energy Performance Certificates · Engineers’ reports</p>
 <p><a href="tel:+356${PHONE}">${PHONE}</a> · <a href="https://wa.me/${WA}">WhatsApp</a> · <a href="mailto:${EMAIL}">${EMAIL}</a><br>© ${new Date().getFullYear()} ${NAME}</p></div>`;
 const hd = $("header"),
-  home = here === "index.html";
+  home = here === "" || here === "index.html";
 document.body.classList.toggle("home", home);
 const sc = () => hd.classList.toggle("sc", !home || scrollY > 40);
 sc();
