@@ -4,26 +4,37 @@ const EMAIL = "newhomemlt@gmail.com",
   NAME = "NewHome Developments";
 const $ = (s) => document.querySelector(s);
 const here = location.pathname.split("/").pop() || "index.html";
-
 const nav = [
   ["/", "Home"],
   ["/developments", "Developments"],
   ["/about", "About"],
   ["/contact", "Contact"],
 ];
-
 const on = (f) =>
   f === here || (f === "developments.html" && here === "project.html")
     ? ' class="on" aria-current="page"'
     : "";
+document.addEventListener("click", (e) => {
+  const i = e.target.closest ? e.target.closest(".gal img,.row img") : null;
+  if (!i) return;
+  const o = document.createElement("div");
+  o.className = "lightbox";
+  o.innerHTML = `<img src="${i.src}" alt="${i.alt}">`;
+  o.onclick = () => o.remove();
+  document.body.appendChild(o);
+});
+addEventListener("keydown", (e) => {
+  if (e.key === "Escape")
+    document.querySelectorAll(".lightbox").forEach((x) => x.remove());
+});
 const L = (n) => `<a href="${n[0]}"${on(n[0])}>${n[1]}</a>`;
 $("header").innerHTML =
-  `<div class="wrap hd"><a class="brand" href="/" aria-label="${NAME} home"><img src="images/logo.png" alt="${NAME} logo"></a><nav class="dn" aria-label="Main">${nav.map(L).join("")}</nav><button class="menu" aria-expanded="false">Menu</button><nav class="mob" aria-label="Mobile">${nav.map(L).join("")}</nav></div>`;
+  `<div class="wrap hd"><a class="brand" href="index.html" aria-label="${NAME} home"><img src="images/logo.png" alt="${NAME} logo"></a><nav class="dn" aria-label="Main">${nav.map(L).join("")}</nav><button class="menu" aria-expanded="false">Menu</button><nav class="mob" aria-label="Mobile">${nav.map(L).join("")}</nav></div>`;
 $("footer").innerHTML =
   `<div class="wrap"><img src="images/logo.png" alt="${NAME}"><p>Direct from the developer. No agent fees.<br>New residential developments · Energy Performance Certificates · Engineers’ reports</p>
-<p><a href="tel:+356${PHONE}">${PHONE}</a> · <a href="https://wa.me/${WA}">WhatsApp</a> · <a href="mailto:${EMAIL}">${EMAIL}</a><br>© ${new Date().getFullYear()} ${NAME}</p></div>`;
+<p><a href="tel:+356${PHONE}">${PHONE}</a> · <a href="https://wa.me/${WA}">WhatsApp</a> · <a href="mailto:${EMAIL}">${EMAIL}</a><br><a href="/privacy">Privacy Policy</a> · © ${new Date().getFullYear()} ${NAME}</p></div>`;
 const hd = $("header"),
-  home = here === "" || here === "index.html";
+  home = here === "index.html";
 document.body.classList.toggle("home", home);
 const sc = () => hd.classList.toggle("sc", !home || scrollY > 40);
 sc();
@@ -98,6 +109,17 @@ if (pr) {
 <p><a class="btn" href="contact.html?project=${encodeURIComponent(p.title)}">Contact Us</a> <a class="btn alt" href="developments.html">All developments</a></p></div></div></section>`;
     const c = pr.querySelector(".cmp");
     if (c) {
+      const ai = c.querySelector("img"),
+        fit = () => {
+          if (ai.naturalWidth) {
+            const r = ai.naturalWidth / ai.naturalHeight,
+              cl = (lo, hi) => Math.min(hi, Math.max(lo, r));
+            c.style.setProperty("--rn", cl(0.62, 1));
+            c.style.setProperty("--rw", cl(0.8, 1.05));
+          }
+        };
+      ai.addEventListener("load", fit);
+      fit();
       const t = c.querySelector(".top"),
         k = c.querySelector(".knob"),
         s = pr.querySelector(".rng");

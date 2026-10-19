@@ -1,5 +1,30 @@
 
 [[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/developments.html"
+  to = "/developments"
+  status = 301
+
+[[redirects]]
+  from = "/about.html"
+  to = "/about"
+  status = 301
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact"
+  status = 301
+
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy"
+  status = 301
+
+[[redirects]]
   from = "/developments"
   to = "/developments.html"
   status = 200
@@ -15,6 +40,6 @@
   status = 200
 
 [[redirects]]
-  from = "/index.html"
-  to = "/"
-  status = 301
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
