@@ -15,7 +15,9 @@ const nav = [
   ["/contact", "Contact"],
 ];
 const on = (f) =>
-  f === here || (f === "developments.html" && here === "project.html")
+  f === here ||
+  (f === "developments.html" &&
+    (here === "project.html" || path.indexOf("/developments/") === 0))
     ? ' class="on" aria-current="page"'
     : "";
 document.addEventListener("click", (e) => {
@@ -69,7 +71,7 @@ mb.onclick = () => {
   mb.setAttribute("aria-expanded", o);
 };
 const card = (p) =>
-  `<article class="card"><img src="${p.cover}" alt="${p.title}" loading="lazy"><div>${p.status ? `<span class="tag">${p.status}</span>` : ""}<span class="loc">${p.location}</span><h3>${p.title}</h3><p>${p.summary}</p><a class="btn" href="project.html?p=${p.slug}">View Project</a></div></article>`;
+  `<article class="card"><img src="${p.cover}" alt="${p.title}" loading="lazy"><div>${p.status ? `<span class="tag">${p.status}</span>` : ""}<span class="loc">${p.location}</span><h3>${p.title}</h3><p>${p.summary}</p><a class="btn" href="/developments/${p.slug}">View Project</a></div></article>`;
 const cards = $("#cards");
 if (cards) cards.innerHTML = PROJECTS.map(card).join("");
 const dn = $("#done");
@@ -79,20 +81,24 @@ if (dn)
   )
     .map(
       (p) =>
-        `<div class="done"><p class="loc">${p.location}</p><h3>${p.title}</h3><p style="max-width:60ch">${p.summary}</p><div class="ba"><figure><img src="${p.before}" alt="${p.title} before" loading="lazy"><figcaption>Before</figcaption></figure><figure><img src="${p.after}" alt="${p.title} after" loading="lazy"><figcaption>After</figcaption></figure></div>${p.beforeNote ? `<p class="cap">${p.beforeNote}</p>` : ""}<a class="btn" href="project.html?p=${p.slug}">View Project</a></div>`,
+        `<div class="done"><p class="loc">${p.location}</p><h3>${p.title}</h3><p style="max-width:60ch">${p.summary}</p><div class="ba"><figure><img src="${p.before}" alt="${p.title} before" loading="lazy"><figcaption>Before</figcaption></figure><figure><img src="${p.after}" alt="${p.title} after" loading="lazy"><figcaption>After</figcaption></figure></div>${p.beforeNote ? `<p class="cap">${p.beforeNote}</p>` : ""}<a class="btn" href="/developments/${p.slug}">View Project</a></div>`,
     )
     .join("");
 const pr = $("#project");
 if (pr) {
   const p = PROJECTS.find(
-    (x) => x.slug === new URLSearchParams(location.search).get("p"),
+    (x) =>
+      x.slug === (pr.dataset.slug || new URLSearchParams(location.search).get("p")),
   );
   if (!p)
     pr.innerHTML =
       '<div class="wrap sec"><h1>Project not found</h1><p><a href="developments.html">See all developments</a></p></div>';
   else {
-    document.title = `${p.title} | ${NAME}`;
-    document.querySelector("meta[name=description]").content = p.summary;
+    // Generated project pages (developments/<slug>.html) already carry their own title and description.
+    if (!pr.dataset.slug) {
+      document.title = `${p.title} | ${NAME}`;
+      document.querySelector("meta[name=description]").content = p.summary;
+    }
     const row = (t, x, i) =>
       `<div class="row"><div><h2>${t}</h2><p>${x}</p></div><div><img src="${i}" alt="${t}"></div></div>`;
     const compare =

@@ -1,4 +1,5 @@
-/* ADD A PROJECT: copy one block, change slug + fields, drop images in /images. Page: project.html?p=<slug> */
+/* ADD A PROJECT: copy one block, change slug + fields, drop images in /images.
+   Then run `node scripts/build-seo.mjs` to generate developments/<slug>.html, the listings, sitemap.xml and robots.txt. */
 const PROJECTS = [
   {
     slug: "san-gwann-san-mikiel",
