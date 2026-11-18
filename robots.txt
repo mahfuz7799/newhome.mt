@@ -1,0 +1,9 @@
+# Search and AI search crawlers may read the whole site.
+User-agent: *
+Allow: /
+
+# OpenAI's search crawler, used for ChatGPT search answers.
+User-agent: OAI-SearchBot
+Allow: /
+
+Sitemap: https://newhome.mt/sitemap.xml
