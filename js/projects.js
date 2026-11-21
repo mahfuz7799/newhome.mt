@@ -99,6 +99,9 @@ const PROJECTS = [
   {
     slug: "hadrian-flats",
     title: "Hadrian Flats",
+    h1: "Hadrian Flats San Ġwann",
+    seoTitle: "Hadrian Flats San Ġwann | Lift & Rooftop Development | NewHome",
+    seoDescription: "Hadrian Flats in San Ġwann: an airspace development with a new passenger lift, renewed common areas and rooftop washrooms for existing owners.",
     location: "San Ġwann, Malta",
     status: "Completed",
     cover: "images/hadrian-cover.jpg",
