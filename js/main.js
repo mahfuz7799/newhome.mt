@@ -112,7 +112,7 @@ if (pr) {
       p.gallery && p.gallery.length
         ? `<h3 style="margin-top:48px">${compare ? "Project gallery" : "Project photos"}</h3><div class="gal">${p.gallery.map((g) => `<figure><img src="${g[0]}" alt="${g[1]}" loading="lazy"><figcaption class="cap">${g[1]}</figcaption></figure>`).join("")}</div>`
         : "";
-    pr.innerHTML = `<section class="hero"><div class="wrap"><div>${p.status ? `<span class="tag">${p.status}</span>` : ""}<p class="loc">${p.location}</p><h1>${p.title}</h1><p>${p.overview}</p><a class="btn" href="contact.html?project=${encodeURIComponent(p.title)}">Discuss Your Project</a></div>
+    pr.innerHTML = `<section class="hero"><div class="wrap"><div>${p.status ? `<span class="tag">${p.status}</span>` : ""}<p class="loc">${p.location}</p><h1>${p.h1 || p.title}</h1><p>${p.overview}</p><a class="btn" href="contact.html?project=${encodeURIComponent(p.title)}">Discuss Your Project</a></div>
 <div><img src="${p.cover}" alt="${p.title}"><p class="cap">${p.coverNote || ""}</p></div></div></section>
 <section class="sec"><div class="wrap">${compare}${gallery}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="notes"><h2>Notes for potential clients</h2><ul class="tick">${(p.notes || []).map((n) => `<li>${n}</li>`).join("")}</ul><p>${p.benefits || ""}</p>
